@@ -29,40 +29,126 @@ public class List {
 
     /** GIVE Adds a CharData object with the given character to the beginning of this list. */
     public void addFirst(char chr) {
-        // Your code goes here
+        CharData data = new CharData(chr);
+        Node newNode = new Node(data);
+        newNode.next = first;
+        first = newNode;
+        size++;
     }
     
     /** GIVE Textual representation of this list. */
     public String toString() {
-        // Your code goes here
+        Node current = first;
+        String text = "";
+        while(current != null){
+            text += current.toString();
+            current = current.next;
+        }
+        return text;
     }
 
     /** Returns the index of the first CharData object in this list
      *  that has the same chr value as the given char,
      *  or -1 if there is no such object in this list. */
     public int indexOf(char chr) {
-        // Your code goes here
+        if(size == 0){
+            return -1;
+        }else{
+            int count = 0;
+            Node current = first;
+            while(current != null){
+                count++;
+                if(current.cp.chr == chr){
+                    return count;
+                }else{
+                    current = current.next;
+                }
+            }
+            return -1;
+        }
     }
 
     /** If the given character exists in one of the CharData objects in this list,
      *  increments its counter. Otherwise, adds a new CharData object with the
      *  given chr to the beginning of this list. */
     public void update(char chr) {
-        // Your code goes here
+        if(indexOf(chr) != -1){
+            int count = 0;
+            int index = indexOf(chr);
+            Node current = first;
+            while(current != null){
+                count++;
+                if(count == index){
+                    current.cp.count++;
+                    break;
+                }else{
+                    current = current.next;
+                }
+            }
+        }else{
+            addFirst(chr);
+        }
     }
 
     /** GIVE If the given character exists in one of the CharData objects
      *  in this list, removes this CharData object from the list and returns
      *  true. Otherwise, returns false. */
     public boolean remove(char chr) {
-        // Your code goes here
+        if(size == 0){
+            return false;
+        }else{
+            int count = 0;
+            int secondCount = 0;
+            int inList = 0;
+            Node current = first;
+            while(current != null){
+                count++;
+                if(current.cp.chr == chr){
+                    inList = 1;
+                    break;
+                }else{
+                    current = current.next;
+                }
+            }
+            if(inList == 1){
+                current = first;
+                while(current != null){
+                    secondCount++;
+                    if(secondCount == count - 1){
+                        current.next = (current.next).next;
+                        size--;
+                        return true;
+                    }else{
+                        current = current.next;
+                    }
+                }
+            }
+            
+            return false;
+            
+        }
     }
 
     /** Returns the CharData object at the specified index in this list. 
      *  If the index is negative or is greater than the size of this list, 
-     *  throws an IndexOutOfBoundsException. */
-    public CharData get(int index) {
-        // Your code goes here
+     *  throws an IndexOutOfBoundsException. 
+     * @throws Exception */
+    public CharData get(int index) throws Exception {
+        if(size == 0){
+            throw new Exception("IndexOutOfBoundsException");
+        }else{
+            int count = 0;
+            Node current = first;
+            while(current != null){
+                count++;
+                if(count == index){
+                    return current.cp;
+                }else{
+                    current = current.next;
+                }
+            }
+            throw new Exception("IndexOutOfBoundsException");
+        }
     }
 
     /** Returns an array of CharData objects, containing all the CharData objects in this list. */
