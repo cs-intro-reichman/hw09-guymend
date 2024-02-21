@@ -3,7 +3,7 @@ import java.util.LinkedList;
 
 public class ListTest {
     public static void main(String[] args) {
-        String methodName = "addFirst";
+        String methodName = "update";
         boolean result = false;
         switch (methodName) {
             case "addFirst":

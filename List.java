@@ -39,9 +39,13 @@ public class List {
     /** GIVE Textual representation of this list. */
     public String toString() {
         Node current = first;
-        String text = "";
+        String text = "(";
         while(current != null){
-            text += current.toString();
+            if(current.next == null){
+                text += current.toString()+")";
+            }else{
+                text += current.toString()+" ";
+            }
             current = current.next;
         }
         return text;
@@ -55,16 +59,18 @@ public class List {
             return -1;
         }else{
             int count = 0;
+            int index = -1;
             Node current = first;
             while(current != null){
-                count++;
                 if(current.cp.chr == chr){
-                    return count;
+                    index = count;
+                    current = current.next;
                 }else{
                     current = current.next;
                 }
+                count++;
             }
-            return -1;
+            return index;
         }
     }
 
@@ -77,13 +83,13 @@ public class List {
             int index = indexOf(chr);
             Node current = first;
             while(current != null){
-                count++;
                 if(count == index){
                     current.cp.count++;
                     break;
                 }else{
                     current = current.next;
                 }
+                count++;
             }
         }else{
             addFirst(chr);
@@ -140,12 +146,12 @@ public class List {
             int count = 0;
             Node current = first;
             while(current != null){
-                count++;
                 if(count == index){
                     return current.cp;
                 }else{
                     current = current.next;
                 }
+                count++;
             }
             throw new IndexOutOfBoundsException("IndexOutOfBoundsException");
         }
