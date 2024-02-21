@@ -63,8 +63,8 @@ public class List {
             Node current = first;
             while(current != null){
                 if(current.cp.chr == chr){
-                    index = count;
-                    current = current.next;
+                    return count;
+                    //current = current.next;
                 }else{
                     current = current.next;
                 }
