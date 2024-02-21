@@ -133,9 +133,9 @@ public class List {
      *  If the index is negative or is greater than the size of this list, 
      *  throws an IndexOutOfBoundsException. 
      * @throws Exception */
-    public CharData get(int index) throws Exception {
+    public CharData get(int index) throws IndexOutOfBoundsException {
         if(size == 0){
-            throw new Exception("IndexOutOfBoundsException");
+            throw new IndexOutOfBoundsException("IndexOutOfBoundsException");
         }else{
             int count = 0;
             Node current = first;
@@ -147,7 +147,7 @@ public class List {
                     current = current.next;
                 }
             }
-            throw new Exception("IndexOutOfBoundsException");
+            throw new IndexOutOfBoundsException("IndexOutOfBoundsException");
         }
     }
 
